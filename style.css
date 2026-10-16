@@ -1,70 +1,168 @@
-*{
-    margin:0;
-    padding:0;
+:root {
+    color-scheme: dark;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-synthesis: none;
+    --ink: #f1f3eb;
+    --muted: #aab8ad;
+    --paper: #879896;
+    --tile: #202b29;
+    --accent: #f18a68;
+    --accent-dark: #dc7054;
+    --line: #3a4a45;
+    --shadow: 0 18px 50px rgb(0 0 0 / 32%);
 }
-body{
-    background-color: #548687;
-    text-align: center;
+
+* {
+    box-sizing: border-box;
 }
-.container{
-    height: 70vh;
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    padding: clamp(2rem, 7vh, 5rem) 1.25rem 2.5rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:1.5vmin;
-}
-.game{
-    height:60vmin;
-    width:60vmin;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    align-items: center;
-    gap:1.5vmin;
-
-}
-.box{
-    height:18vmin;
-    width: 18vmin;
-    border-radius:1rem;
-    border:none;
-    box-shadow:0 0 1rem rbga(0,0,0,0.3);
-    font-size:8vmin;
-    color:#b0413e;
-    background-color: #ffffc7;
-
-}
-
-#reset-btn{
-    padding:1rem;
-    font-size:1.25rem;
-    background-color:#191913;
-    color:#fff;
-    border-radius:1rem;
-    border:none;
-}
-
-#new-btn{
-    padding:1rem;
-    font-size:1.25rem;
-    background-color:#191913;
-    color:#fff;
-    border-radius:1rem;
-    border:none;
-}
-
-#msg{
-    color:#ffffc7;
-    font-size: 8vmin;
-}
-.msg-container{
-    height:100vmin;
-    display:flex;
-    justify-content: center;
-    align-items:center;
     flex-direction: column;
-    gap:4rem;
+    align-items: center;
+    color: var(--ink);
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 8% 5%, rgb(241 138 104 / 10%), transparent 32rem),
+        radial-gradient(ellipse at 96% 90%, rgb(88 139 117 / 13%), transparent 34rem),
+        var(--paper);
 }
-.hide{
-    display:none;
+
+h1 {
+    margin: 0 0 clamp(1.5rem, 5vh, 3rem);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.75rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: clamp(1.5rem, 5vh, 2.75rem);
+}
+
+.game {
+    width: min(79vw, 25rem);
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.55rem, 2.3vw, 1rem);
+    padding: clamp(0.65rem, 2.5vw, 1.1rem);
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1.5rem;
+    background: rgb(255 255 255 / 4%);
+    box-shadow: var(--shadow);
+}
+
+.box {
+    min-width: 0;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: clamp(0.75rem, 3vw, 1.25rem);
+    color: var(--accent-dark);
+    background: var(--tile);
+    box-shadow: 0 3px 8px rgb(0 0 0 / 18%);
+    font: 700 clamp(2rem, 10vw, 4.25rem)/1 "Trebuchet MS", "Segoe UI", sans-serif;
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.box:not(:disabled):hover {
+    transform: translateY(-3px);
+    background: #2a3835;
+    box-shadow: 0 8px 18px rgb(0 0 0 / 28%);
+}
+
+.box:disabled {
+    cursor: default;
+}
+
+.box:focus-visible,
+#reset-btn:focus-visible,
+#new-btn:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+#reset-btn,
+#new-btn {
+    min-height: 3.25rem;
+    padding: 0.8rem 1.35rem;
+    border: 0;
+    border-radius: 999px;
+    color: #151d1c;
+    background: var(--accent);
+    box-shadow: 0 5px 12px rgb(0 0 0 / 24%);
+    font: 700 0.9rem/1 "Trebuchet MS", "Segoe UI", sans-serif;
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+#reset-btn:hover,
+#new-btn:hover {
+    transform: translateY(-2px);
+    background: var(--accent-dark);
+    box-shadow: 0 8px 18px rgb(0 0 0 / 32%);
+}
+
+#msg {
+    max-width: min(34rem, 90vw);
+    margin: 0;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.5rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.msg-container:not(.hide) {
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: rgb(8 13 12 / 84%);
+    backdrop-filter: blur(8px);
+}
+
+.msg-container:not(.hide) #msg {
+    color: var(--paper);
+}
+
+.hide {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    body {
+        justify-content: center;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .game {
+        width: min(90vw, 28rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
 }
