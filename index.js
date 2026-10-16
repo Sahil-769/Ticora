@@ -66,8 +66,9 @@ const showTie=()=>{
     disableBoxes();
 
 }
-let isWinner=false;
+
 const checkWinner = () => {
+    let isWinner=false;
     for (let pattern of winPatterns) {
         let pos1Val = boxes[pattern[0]].innerText;
         let pos2Val = boxes[pattern[1]].innerText;
@@ -82,7 +83,7 @@ const checkWinner = () => {
         }
     }
     // isWinner ka use nahi karunga to 9th move agar succed ka hoga to vo run nahi karega
-    if (countClick === 9 && isWinner==false) {
+    if (countClick === 9 && isWinner===false) {
         showTie();
     }
 
